@@ -372,3 +372,6 @@ class PostViewsTest(TestCase):
             user=follower_user, author=follower_user
         ).exists()
         self.assertFalse(following)
+
+    def test_(self):
+        """Проверьте, что вы можете подписаться на пользователя только один раз"""
