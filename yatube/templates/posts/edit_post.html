@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Редактировать пост{% endblock %}
+{% block content %}
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 p-5">
+        <div class="card">
+          <div class="card-header">       
+            Редактировать пост             
+          </div>
+          <div class="card-body">        
+            <form method="post" action="{% url 'posts:post_edit' post.id %}">
+              {% csrf_token %}
+              <div class="form-group row my-3 p-3">
+                <label for="id_text">
+                  Текст поста                  
+                  <span class="required text-danger" >*</span>                  
+                </label>
+                <textarea name="text" cols="40" rows="10" class="form-control" required id="id_text">{% spaceless %}
+                  {% if form.cleaned_data.text %} 
+                    {{ form.cleaned_data.text }} 
+                  {% else %} 
+                    {{ form.instance.text }}
+                  {% endif %}
+                  {% endspaceless %}</textarea>
+                <small id="id_text-help" class="form-text text-muted">
+                  Текст нового поста
+                </small>                  
+              </div>            
+              <div class="form-group row my-3 p-3">
+                <label for="id_group">
+                  Group                  
+                </label>
+                <select name="group" class="form-control" id="id_group">
+                  <option value="">---------</option>
+                  <option value="1">Группа: Великие русские писатели</option>
+                  <option value="2">Группа: Лев Толстой</option>
+                  <option value="3">Группа: Русские классики</option>
+                  <option value="4">Группа: Группа Павла</option>
+                </select>
+                <small id="id_group-help" class="form-text text-muted">
+                  Группа, к которой будет относиться пост
+                </small>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">
+                  Добавить
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
