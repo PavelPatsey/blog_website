@@ -53,6 +53,11 @@ def profile(request, username):
             user=request.user, author=author
         ).exists()
     context["following"] = following
+    if request.user != author:
+        show_subscribe = True
+    else:
+        show_subscribe = False
+    context["show_subscribe"] = show_subscribe
     return render(request, "posts/profile.html", context)
 
 

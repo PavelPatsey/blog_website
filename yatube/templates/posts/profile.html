@@ -13,12 +13,14 @@
                     Отписаться
                 </a>
                 {% else %}
+                    {% if show_subscribe %}
                     <a
                     class="btn btn-lg btn-primary"
                     href="{% url 'posts:profile_follow' author.username %}" role="button"
                     >
                     Подписаться
                     </a>
+                    {% endif %}
                 {% endif %}
             </div>
         {% endif %}
