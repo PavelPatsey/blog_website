@@ -7,7 +7,7 @@ def page_not_found(request, exception):
     )
 
 
-def server_error(request, exception):
+def server_error(request):
     return render(
         request, "core/500.html", {"path": request.path}, status=500
     )
