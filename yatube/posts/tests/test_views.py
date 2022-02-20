@@ -373,5 +373,25 @@ class PostViewsTest(TestCase):
         ).exists()
         self.assertFalse(following)
 
-    def test_(self):
-        """Проверьте, что вы можете подписаться на пользователя только один раз"""
+    def test_you_can_subscribe_to_a_user_only_once(self):
+        """Можно подписаться на пользователя только один раз"""
+        follower_user = User.objects.create_user(username="follower")
+        followed_user = User.objects.create_user(username="followed")
+        follower_client = Client()
+        follower_client.force_login(follower_user)
+        follow_count = Follow.objects.filter(
+            user=follower_user, author=followed_user
+        ).count()
+        self.assertEqual(follow_count, 0)
+        response = follower_client.get("/profile/followed/follow/")
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        follow_count = Follow.objects.filter(
+            user=follower_user, author=followed_user
+        ).count()
+        self.assertEqual(follow_count, 1)
+        response = follower_client.get("/profile/followed/follow/")
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        follow_count = Follow.objects.filter(
+            user=follower_user, author=followed_user
+        ).count()
+        self.assertEqual(follow_count, 1)
