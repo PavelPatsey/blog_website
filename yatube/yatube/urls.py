@@ -27,6 +27,7 @@ urlpatterns = [
 ]
 
 handler404 = "core.views.page_not_found"
+handler403 = "core.csrf_failure"
 handler500 = "core.views.server_error"
 
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
