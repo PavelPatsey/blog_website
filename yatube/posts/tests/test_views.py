@@ -360,3 +360,15 @@ class PostViewsTest(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         first_object = response.context["page_obj"][0]
         self.assertNotEqual(first_object, notfollowed_post)
+
+    def test_you_cant_follow_yourself(self):
+        """Нельзя подписаться на самого себя"""
+        follower_user = User.objects.create_user(username="follower")
+        follower_client = Client()
+        follower_client.force_login(follower_user)
+        response = follower_client.get("/profile/follower/follow/")
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        following = Follow.objects.filter(
+            user=follower_user, author=follower_user
+        ).exists()
+        self.assertFalse(following)
