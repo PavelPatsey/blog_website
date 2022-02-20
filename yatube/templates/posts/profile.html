@@ -3,7 +3,7 @@
 {% block title %}Профайл пользователя {{ author.get_full_name }}{% endblock %}
 {% block content %}
     <div class="container py-5">
-        {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated and show_subscribe %}
             <div class="mb-5">
                 {% if following %}
                 <a
@@ -13,14 +13,12 @@
                     Отписаться
                 </a>
                 {% else %}
-                    {% if show_subscribe %}
                     <a
                     class="btn btn-lg btn-primary"
                     href="{% url 'posts:profile_follow' author.username %}" role="button"
                     >
                     Подписаться
                     </a>
-                    {% endif %}
                 {% endif %}
             </div>
         {% endif %}
