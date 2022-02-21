@@ -46,11 +46,6 @@ def profile(request, username):
         "post_count": post_count,
         "page_obj": page_obj,
     }
-    following = False
-    if request.user.is_authenticated:
-        following = Follow.objects.filter(
-            user=request.user, author=author
-        ).exists()
     following = (
         request.user.is_authenticated
         and Follow.objects.filter(user=request.user, author=author).exists()
