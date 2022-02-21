@@ -64,7 +64,7 @@ def profile(request, username):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post_count = post.author.posts.count()
-    comments = Comment.objects.filter(post=post)
+    comments = post.comments.order_by("-created")
     title = post.text[:30]
     form = CommentForm()
     context = {
