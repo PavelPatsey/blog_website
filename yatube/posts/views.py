@@ -11,7 +11,7 @@ from .models import Comment, Follow, Group, Post, User
 
 @cache_page(settings.SECONDS_TO_CACHE_PAGE)
 def index(request):
-    post_list = Post.objects.all().order_by("-pub_date")
+    post_list = Post.objects.order_by("-pub_date")
     paginator = Paginator(post_list, settings.CONST_POST_ON_PAGE)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
