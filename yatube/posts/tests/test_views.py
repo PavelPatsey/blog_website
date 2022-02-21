@@ -241,10 +241,7 @@ class PostViewsTest(TestCase):
         response = self.authorized_client.get(
             reverse("posts:post_detail", args=[f"{PostViewsTest.post.id}"])
         )
-        comment_count = Comment.objects.filter(
-            post=PostViewsTest.post
-        ).count()
-        last_comment = response.context["comments"][comment_count - 1]
+        last_comment = response.context["comments"][0]
         self.assertEqual(last_comment, comment)
         self.assertEqual(last_comment.text, "2 test comment text")
 
