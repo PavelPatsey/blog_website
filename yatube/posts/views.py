@@ -51,11 +51,12 @@ def profile(request, username):
         following = Follow.objects.filter(
             user=request.user, author=author
         ).exists()
+    following = (
+        request.user.is_authenticated
+        and Follow.objects.filter(user=request.user, author=author).exists()
+    )
     context["following"] = following
-    if request.user != author:
-        show_subscribe = True
-    else:
-        show_subscribe = False
+    show_subscribe = request.user != author
     context["show_subscribe"] = show_subscribe
     return render(request, "posts/profile.html", context)
 
