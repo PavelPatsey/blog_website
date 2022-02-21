@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
@@ -7,13 +8,11 @@ from django.views.decorators.cache import cache_page
 from .forms import CommentForm, PostForm
 from .models import Comment, Follow, Group, Post, User
 
-CONST_POST_ON_PAGE = 10
 
-
-@cache_page(20)
+@cache_page(settings.SECONDS_TO_CACHE_PAGE)
 def index(request):
     post_list = Post.objects.all().order_by("-pub_date")
-    paginator = Paginator(post_list, CONST_POST_ON_PAGE)
+    paginator = Paginator(post_list, settings.CONST_POST_ON_PAGE)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
@@ -25,7 +24,7 @@ def index(request):
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     post_list = group.posts.order_by("-pub_date")
-    paginator = Paginator(post_list, CONST_POST_ON_PAGE)
+    paginator = Paginator(post_list, settings.CONST_POST_ON_PAGE)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
@@ -39,7 +38,7 @@ def profile(request, username):
     author = get_object_or_404(User, username=username)
     post_list = author.posts.order_by("-pub_date")
     post_count = post_list.count()
-    paginator = Paginator(post_list, CONST_POST_ON_PAGE)
+    paginator = Paginator(post_list, settings.CONST_POST_ON_PAGE)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
@@ -162,7 +161,7 @@ def add_comment(request, post_id):
 def follow_index(request):
     authors = request.user.follower.all().values("author")
     post_list = Post.objects.filter(author__in=authors).order_by("-pub_date")
-    paginator = Paginator(post_list, CONST_POST_ON_PAGE)
+    paginator = Paginator(post_list, settings.CONST_POST_ON_PAGE)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {

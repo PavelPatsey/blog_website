@@ -120,3 +120,6 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+CONST_POST_ON_PAGE = 10
+SECONDS_TO_CACHE_PAGE = 20
