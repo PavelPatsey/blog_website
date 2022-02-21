@@ -141,15 +141,17 @@ class PostURLTests(TestCase):
         """Адресс profile_unfollow перенаправит пользователя на страницу
         profile автора, от которого отписались."""
         follower_user = User.objects.create_user(username="follower")
-        followed_user = User.objects.create_user(username="followed")
+        following_author = User.objects.create_user(
+            username="following_author"
+        )
         follower_client = Client()
         follower_client.force_login(follower_user)
         Follow.objects.create(
             user=follower_user,
-            author=followed_user,
+            author=following_author,
         )
         response = follower_client.get(
-            "/profile/followed/unfollow/",
+            "/profile/following_author/unfollow/",
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertRedirects(response, "/profile/followed/")
+        self.assertRedirects(response, "/profile/following_author/")
