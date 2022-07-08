@@ -25,5 +25,14 @@ python3 manage.py runserver
 ```
 python3 manage.py test
 ```
+- Примените миграции:
+```
+python3 manage.py migrate
+```
+- Чтобы создать суперпользователя, в папке с файлом manage.py выполните команду:
+```
+python3 manage.py createsuperuser
+```
+
 ### Авторы
-Яндекс.Практикум и Pavel Patsey 
+Pavel Patsey 
