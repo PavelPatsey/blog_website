@@ -17,6 +17,10 @@ python3 -m venv venv
 ```
 pip install -r requirements.txt
 ``` 
+- Примените миграции:
+```
+python3 manage.py migrate
+```
 - Чтобы запустить работу сайта, в папке с файлом manage.py выполните команду:
 ```
 python3 manage.py runserver
@@ -24,10 +28,6 @@ python3 manage.py runserver
 - Чтобы запустить тесты, в папке с файлом manage.py выполните команду:
 ```
 python3 manage.py test
-```
-- Примените миграции:
-```
-python3 manage.py migrate
 ```
 - Чтобы создать суперпользователя, в папке с файлом manage.py выполните команду:
 ```
