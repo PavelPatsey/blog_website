@@ -1,8 +1,7 @@
-# backend_community_homework
+# yatube_project
 
 [![CI](https://github.com/yandex-praktikum/hw02_community/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw02_community/actions/workflows/python-app.yml)
 
-# yatube_project
 ### Описание
 Социальная сеть для публикации личных дневников. Можно создавать свою страницу, подписываться на других авторов и комментировать их записи.
 ### Технологии
