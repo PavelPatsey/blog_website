@@ -34,4 +34,4 @@ python3 manage.py createsuperuser
 ```
 
 ### Авторы
-Pavel Patsey 
+Пацей Павел
