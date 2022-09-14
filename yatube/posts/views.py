@@ -34,26 +34,26 @@ def group_posts(request, slug):
     return render(request, "posts/group_list.html", context)
 
 
-def profile(request, username):
-    author = get_object_or_404(User, username=username)
-    post_list = author.posts.order_by("-pub_date")
-    post_count = post_list.count()
-    paginator = Paginator(post_list, settings.CONST_POST_ON_PAGE)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    context = {
-        "author": author,
-        "post_count": post_count,
-        "page_obj": page_obj,
-    }
-    following = (
-        request.user.is_authenticated
-        and Follow.objects.filter(user=request.user, author=author).exists()
-    )
-    context["following"] = following
-    show_subscribe = request.user != author
-    context["show_subscribe"] = show_subscribe
-    return render(request, "posts/profile.html", context)
+# def profile(request, username):
+#     author = get_object_or_404(User, username=username)
+#     post_list = author.posts.order_by("-pub_date")
+#     post_count = post_list.count()
+#     paginator = Paginator(post_list, settings.CONST_POST_ON_PAGE)
+#     page_number = request.GET.get("page")
+#     page_obj = paginator.get_page(page_number)
+#     context = {
+#         "author": author,
+#         "post_count": post_count,
+#         "page_obj": page_obj,
+#     }
+#     following = (
+#         request.user.is_authenticated
+#         and Follow.objects.filter(user=request.user, author=author).exists()
+#     )
+#     context["following"] = following
+#     show_subscribe = request.user != author
+#     context["show_subscribe"] = show_subscribe
+#     return render(request, "posts/profile.html", context)
 
 
 def post_detail(request, post_id):
