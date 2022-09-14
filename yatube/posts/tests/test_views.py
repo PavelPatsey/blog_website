@@ -202,8 +202,9 @@ class PostViewsTest(TestCase):
                 self.assertEqual(first_object, post)
 
     def test_post_with_image_appears_on_page(self):
-        """При выводе поста с картинкой изображение передаётся в словаре context
-        на главную страницу, на страницу профайла, на страницу группы"""
+        """При выводе поста с картинкой изображение передаётся в словаре
+        context на главную страницу, на страницу профайла, на страницу
+        группы"""
         post = Post.objects.create(
             text="Test post text",
             author=PostViewsTest.user,
